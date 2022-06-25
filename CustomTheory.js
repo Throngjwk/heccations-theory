@@ -3,9 +3,10 @@ import { Localization } from "./api/Localization";
 import { BigNumber } from "./api/BigNumber";
 import { theory } from "./api/Theory";
 import { Utils } from "./api/Utils";
+import { game } from "../api/Game";
 
 var id = "my_custom_theory_id";
-var name = "My Custom Theory";
+var name = "Heccations Theory";
 var description = "A basic theory.";
 var authors = "Gilles-Philippe Paillé";
 var version = 1;
@@ -75,6 +76,19 @@ var init = () => {
     chapter2 = theory.createStoryChapter(1, "My Second Chapter", "This is line 1 again,\nand this is line 2... again.\n\nNice again.", () => c2.level > 0);
 
     updateAvailability();
+
+    var popup = ui.createPopup({
+        title: "My Popup",
+        content: ui.createStackLayout({
+            children: [
+                ui.createButton({text: "Hack dt anotyer", onClicked: () => game.dt = 1e125}),
+                ui.createButton({text: "Hack dt", onClicked: () => game.dt = 1e25}),
+                ui.createButton({text: "Close", onClicked: () => popup.hide()})
+            ]
+        })
+    });
+
+    popup.show();
 }
 
 var updateAvailability = () => {
@@ -84,8 +98,6 @@ var updateAvailability = () => {
 var tick = (elapsedTime, multiplier) => {
     let dt = BigNumber.from(elapsedTime * multiplier);
     let bonus = theory.publicationMultiplier;
-    currency.value += dt * bonus * getC1(c1.level).pow(getC1Exponent(c1Exp.level)) *
-                                   getC2(c2.level).pow(getC2Exponent(c2Exp.level));
 }
 
 var getPrimaryEquation = () => {

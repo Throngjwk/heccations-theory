@@ -8,7 +8,7 @@ import { game } from "../api/Game";
 var id = "my_custom_theory_id";
 var name = "Heccations Theory";
 var description = "A basic theory.";
-var authors = "Gilles-Philippe Paillé";
+var authors = "Throngjwk";
 var version = 1;
 
 var currency;
